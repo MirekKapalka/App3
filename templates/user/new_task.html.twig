@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create new Task{% endblock %}
+
+{% block body %}
+<h1 class="border border-black rounded-md bg-slate-500 text-3xl font-bold w-2/3  mt-2 mb-2 p-4"><a href={{path('app_index')}}>→Home→</a>
+<a href={{path('app_user')}}>User→</a><a href={{path('app_new_task')}}>New Task→</a>
+</h1>
+
+
+{% include "/user/_thead.html.twig" %}
+
+{# {% for notice in app.flashes('notice') %}
+    {{ notice }}
+{% endfor %} #}
+
+{{ form_start(form,{'attr': {'class':'w-2/3 grid grid-cols-1 align-items-center'}}) }}
+    {{form_widget(form.Name, {'attr': {'class': "h-7 w-2/3 place-self-center float-right bg-zinc-100 border-2 border-black rounded text-center mb-2", 'placeholder':'Nazwa', 'maxlength':'36'}} ) }}
+    {{form_widget(form.Text, {'attr': {'class': "h-48 w-2/3 align-self-start place-self-center float-right bg-zinc-100 border-2 border-black rounded text-center mb-2 ", 'placeholder':'Wpisz opis zadania', 'maxlength':'500'}} )}}
+    {{form_widget(form.Accessibility, {'attr': {'class': "h-7 w-2/3 align-self-start place-self-center float-right bg-zinc-100 border-2 border-black rounded  mb-2 text-center", 'placeholder':'Uprawnienia dostępu do zadania', 'maxlength':'500'}} ) }}
+    {{form_widget(form.Status, {'attr': {'class': "h-7 w-2/3 align-self-start place-self-center float-right bg-zinc-100 border-2 border-black rounded  mb-2 text-center", 'placeholder':'Uprawnienia dostępu do zadania', 'maxlength':'500'}}  )}}
+    {{form_widget(form.Deadline, {'attr': {'class': "h-8 w-2/3 grid grid-cols-2 px-10 gap-5 place-self-center place-self-center float-right bg-zinc-100 border-2 border-black rounded  mb-2 text-center", 'placeholder':'Uprawnienia dostępu do zadania', 'maxlength':'500'}}  )}}
+    
+    <button class="btn bg-zinc-300 hover:bg-zinc-400 w-1/2 place-self-center border-2 mb-2 border-black rounded">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+    <a href={{path('app_user')}} class="btn bg-zinc-300 hover:bg-zinc-400 w-1/3 place-self-center border-2 text-center border-black rounded">Back</a>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task and Comments{% endblock %}
+
+{% block body %}
+<h1 class="border border-black rounded-md bg-slate-500 text-3xl font-bold w-2/3  mt-2 mb-2 p-4"><a href={{path('app_index')}}>→Home→</a>
+<a href={{path('app_user')}}>User→</a><a href={{path('app_user_show', {'id': task.id})}}>Task→</a>
+</h1>
+    {% include "/user/_thead.html.twig" %}
+<div class="border border-black rounded-md grid text-xl w-2/3 mt-2 mb-4 p-2 grid-cols-3 gap-1 place-items-center">
+        
+        
+        <div class="font-bold">{{task.id}}</div>
+        <div class="font-bold">{{task.name}}</div>      
+        <div class="flex"> <div>{{task.getCreated()|date('y-m-d')}}</div>/<div>{{task.getDeadline()|date('y-m-d ')}}</div></div>
+        
+        <div class="col-span-3 py-2 my-2 border-t-2 border-gray-600 w-full text-center">{{task.getText()}}</div>
+        
+</div>
+
+        
+
+{% if (app.user) %}  
+       
+       
+        {% if comments|length()>0 %}     
+                {% for comment in comments %} 
+                  
+                    
+                    <div>{{comment.text}} </div>
+                {% endfor %}
+        {% else %}                   
+                <div > No Comments Found  
+        {% endif %}
+
+{% else %}
+    <div > No User Found</div>
+           
+{% endif %}
+    
+</div>
+    <a href="{{path('app_new_comment', {'id': task.id})}}"> Add New Comment</a></div>
+    <a href="{{ path('app_index') }}">back to list</a>
+
+    <a href="{{ path('app_user_edit', {'id': task.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}

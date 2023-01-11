@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All Tasks{% endblock %}
+
+{% block body %}
+    <h1 class="border border-black rounded-md bg-slate-500 text-3xl font-bold w-2/3  mt-2 mb-2 p-4">
+    
+    <a href={{path('app_index')}}>→Home→</a></h1>
+
+{% include "/user/_thead.html.twig" %}
+  
+    <div class="border border-black rounded-md  text-xl w-2/3 mt-2 mb-4 p-3 grid grid-cols-3 gap-1 place-items-center">
+    
+        {% for pub in public %}
+            <div>{{pub.id}}</div>
+            <div>{{pub.name}}</div>
+            <div>{{pub.getAuthor().getEmail()}}</div>
+            
+
+        {% endfor %}
+        </div>
+            {% for priv in private %}   
+                
+                {# <div class="col-span-2 bg-slate-500 w-full text-center p-2 rounded-sm border border-slate-500">Author {{user.email}}</div>      #}
+
+            {% for task in tasks %}
+                
+            
+                {% if task.Author.getId()==user.id %}
+            
+                <div>Id {{task.id}}</div>
+                <div>{{task.name}}</div>
+                    
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+    
+{% endblock %}

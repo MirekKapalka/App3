@@ -1,0 +1,17 @@
+  <div class="border border-black rounded-md bg-slate-500 text-2xl w-2/3 mt-2 mb-4 p-3 grid grid-cols-4 gap-1 place-items-center">
+        
+           
+                {% if (app.user) %}
+                <div><a href={{path('app_user')}} class="p-1 border-2 border-black rounded m-2 hover:bg-slate-400"> {{ app.user.getEmail() }} </a></div>
+                 <div><a href={{path('app_company')}} class="p-1 border-2 border-black rounded m-2 hover:bg-slate-400">  {{app.user.getCompany().Name}}  </a></div> 
+                <div><a href={{path('app_logout')}} id='logout' class="p-1 border-2 border-black rounded m-2 hover:bg-slate-400">logout</a></div>
+                <div><a href={{path('app_register')}} id='register' class="p-1 border-2 border-black rounded m-2 hover:bg-slate-400">register</a></div>
+                 {% else %}
+                <div class="p-1   m-2 ">Nie zalogowano</div>
+                <div class="p-1 border-2 border-black rounded m-2 hover:bg-slate-400">  PUBLIC ACCESS </a></div>
+                <div><a href={{path('app_login')}} id='login' class="p-1 border-2 border-black rounded m-2 hover:bg-slate-400">login</a></div>
+                <div><a href={{path('app_register')}} id='register' class="p-1 border-2 border-black rounded m-2 hover:bg-slate-400">register</a></div>
+
+                {% endif %}
+       
+    </div>

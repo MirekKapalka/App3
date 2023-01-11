@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+<h1 class="border border-black rounded-md bg-slate-500 text-3xl font-bold w-2/3 mt-2 mb-2 p-4"><a href={{path('app_index')}}>→Home→</a>
+<a href={{path('app_user')}}>User→</a>
+</h1>
+{% include "/user/_thead.html.twig" %}
+
+
+<div class="border border-black rounded-md  text-xl w-2/3 mt-2 mb-4 p-2 grid grid-cols-5  gap-1 place-items-center">
+        
+        <div class="font-bold">NAME</div>
+        <div class="font-bold">Created/Deadline</div>
+        <div class="font-bold">STATUS</div>
+        <div class="font-bold">CONTRACTOR</div>
+        <div class="font-bold">przyjmij prace</div>
+        
+{% if (app.user) %}         
+        {% if private|length()>0 %}     
+                {% for task in private %} 
+                    
+                    <div> <a href="{{ path('app_user_show', {'id': task.id}) }}">{{task.name}}</a></div>
+                    <div class="flex"> <div>{{task.getCreated()|date('y-m-d')}}</div>/<div>{{task.getDeadline()|date('y-m-d ')}}</div></div>
+                    <div>{{task.isStatus()}}</div>
+                    <div>{{task.getContractor}}</div>
+                    <div>
+                             aaaa    
+                       
+                    </div>
+                    
+                {% endfor %}
+        {% else %}                   
+                <div class="col-span-5"> No Records Found</div>
+        {% endif %}
+       
+  <a href="{{ path('app_new_task') }}" class="border text-center border-black rounded-md bg-slate-500 text-xl font-bold w-2/3 col-span-5  mt-2 mb-2 p-4">Create new Task</a> 
+     </div>
+        
+{% else %}
+    {# <div class="col-span-5"> No User Found</div> #}
+           
+{% endif %}
+
+
+    </div>
+
+{# {{ include('user/_delete_form.html.twig') }} #}
+   
+{% endblock %}
